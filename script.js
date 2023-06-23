@@ -17,17 +17,20 @@ submitBtn.addEventListener('click',(event)=>{
 		localStorage.setItem('test',JSON.stringify(user));
 	}
 	alert(`Logged in as ${username.value}`);
+	username.value = "";
+	password.value = "";
 });
 		
 var data = localStorage.getItem('test');
 if (data !== null) {
-	let span = document.createElement('span');
-	span.innerHTML = `<button id='existing' >Login as existing user</button>`;
-	document.querySelector('form').appendChild(span);
-	document.getElementById('existing').addEventListener('click',()=>{
+	let btn = document.createElement('button');
+	btn.setAttribute('id','existing');
+	btn.innerText = 'Login as existing user';
+	document.querySelector('form').append(btn);
+	btn.addEventListener('click',()=>{
 		let existname = JSON.parse(data);
 		alert(`Logged in as ${existname.name}`);
-	})
+	});
 }
 
 
