@@ -4,19 +4,14 @@ let password = document.getElementById('password');
 let submitBtn = document.getElementById('submit');
 let checkBox = document.getElementById('checkbox');
 
-var data = localStorage.getItem("myKey");
-if (data !== null) {
-	let btn = document.createElement('button');
-}
-
 submitBtn.addEventListener('click',(event)=>{
 	event.preventDefault();
 	if (username.value === "" || password.value === "") {
 		return;
 	}
 	let user = {
-		name:username,
-		pass:password,
+		name:username.value,
+		pass:password.value,
 	}
 	if (checkBox.checked) {
 		localStorage.setItem('test',JSON.stringify(user));
@@ -24,6 +19,15 @@ submitBtn.addEventListener('click',(event)=>{
 	alert(`Logged in as ${username.value}`);
 });
 		
-
+var data = localStorage.getItem('test');
+if (data !== null) {
+	let span = document.createElement('span');
+	span.innerHTML = `<button id='existing' >Login as existing user</button>`;
+	document.querySelector('form').appendChild(span);
+	document.getElementById('existing').addEventListener('click',()=>{
+		let existname = JSON.parse(data);
+		alert(`Logged in as ${existname.name}`);
+	})
+}
 
 
